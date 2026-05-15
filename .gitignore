@@ -1,35 +1,32 @@
-*.editorconfig
-*.nuspec
-
-# Exclude Generated Folders
-obj/
-intermediate/
+# ScriptHookRDRDotNet Standard GitIgnore
+.vs/
 [Dd]ebug/
 [Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+intermediate/
 packages/
 archive/
+*.user
+*.suo
+*.sln.docstates
+*.log
+*.pdb
+*.bak
+*.tmp
+*.nuspec
+.idea/
+.reSharper/
+*.DotSettings.user
 
-# Exclude OS generated files
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-.csproj.user
 ehthumbs.db
 Thumbs.db
 Upgrade*.htm
-
-# Exclude log and dump files
-*.log
-*.sqlite
-.vs/
-/.vs
-
-# Exclude Jetbrains folders for Rider users
-**/.idea/
-**/.idea/*
-
-# Exclude Resharper user-defined settings
-*.sln.DotSettings.user
-*.user

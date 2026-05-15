@@ -1,2 +1,8 @@
+# Ignore all in this folder by default
 *
+# Allow tracking of specific SDK files needed for build
+!inc/
+!inc/*.h
+!lib/
+!lib/*.lib
 !.gitignore

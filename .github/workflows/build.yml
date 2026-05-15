@@ -1,0 +1,39 @@
+name: Build Framework V2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+
+    - name: Restore NuGet packages
+      run: nuget restore ScriptHookRDRDotNet.sln
+
+    - name: Build Framework (API and ASI)
+      run: msbuild ScriptHookRDRDotNet.sln /p:Configuration=Release /p:Platform=x64
+
+    - name: Prepare ASI Loader
+      shell: pwsh
+      run: |
+        # The project outputs a DLL, but we need an ASI for the game to load it
+        Move-Item "bin/Release/ScriptHookRDRDotNet.dll" "bin/Release/ScriptHookRDRDotNet.asi" -Force
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ScriptHookRDRDotNet-V2-Framework
+        path: |
+          bin/Release/ScriptHookRDRDotNet.asi
+          bin/Release/ScriptHookRDRNetAPI.dll
+          bin/Release/ScriptHookRDRNetAPI.xml
