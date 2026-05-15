@@ -474,7 +474,9 @@ namespace RDR2.Native
 			if (typeof(T) == typeof(bool))
 			{
 				// Return proper boolean values (true if non-zero and false if zero)
-				bool valueBool = *value != 0;
+				// Mask to 32-bit since the game engine only sets the lower 32 bits for boolean natives.
+				// The upper 32 bits may contain "junk" from dirty registers in some ScriptHook implementations.
+				bool valueBool = (*value & 0xFFFFFFFF) != 0;
 				return NativeHelper<T>.PtrToStructure(new IntPtr(&valueBool));
 			}
 			if (typeof(T) == typeof(IntPtr)) // Has to be before 'IsPrimitive' check
