@@ -63,6 +63,11 @@ namespace RDR2
 		public abstract bool Exists();
 		public abstract void Delete();
 
+		public static bool Exists(PoolObject obj)
+		{
+			return obj != null && obj.Exists();
+		}
+
 		public static implicit operator int(PoolObject e)
 		{
 			// If the PoolObject is null, then we return 0 which indicates a invalid/null handle to the RAGE engine
