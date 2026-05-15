@@ -4,7 +4,7 @@
 //
 
 #define CPP_SCRIPTHOOKRDR_V2
-#undef CPP_SCRIPTHOOKRDR_V2 // Comment this out if you are using keps C++ ScriptHookRDR V2
+// #undef CPP_SCRIPTHOOKRDR_V2 // Commented out to enable keps C++ ScriptHookRDR V2 features
 
 using System;
 using System.Collections.Generic;
@@ -68,12 +68,8 @@ namespace RDR2DN
 		public static extern int worldGetAllBlips(int[] arr, int arrSize);
 
 		[SuppressUnmanagedCodeSecurity]
-		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?worldGetAllCams@@YAHPEAHH@Z")]
-		public static extern int worldGetAllCams(int[] arr, int arrSize);
-
-		[SuppressUnmanagedCodeSecurity]
-		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?worldGetAllVolumes@@YAHPEAHH@Z")]
-		public static extern int worldGetAllVolumes(int[] arr, int arrSize);
+		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?worldGetAllDoors@@YAHPEAHH@Z")]
+		public static extern int worldGetAllDoors(int[] arr, int arrSize);
 
 		/// <summary>
 		/// Switch text labels from the game with your own, this will allow you to provide your custom text in input boxes such as the onscreen keyboard
@@ -82,7 +78,7 @@ namespace RDR2DN
 		/// </summary>
 		[SuppressUnmanagedCodeSecurity]
 		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?switchLabel@@YAXPEBD0@Z")]
-		public static extern int SwitchLabel([MarshalAs(UnmanagedType.LPStr)] string oldLabel, [MarshalAs(UnmanagedType.LPStr)] string newLabel);
+		public static extern void SwitchLabel([MarshalAs(UnmanagedType.LPStr)] string oldLabel, [MarshalAs(UnmanagedType.LPStr)] string newLabel);
 
 		/// <summary>
 		/// Returns a pointer to local variables in game scripts 
@@ -93,6 +89,15 @@ namespace RDR2DN
 		[SuppressUnmanagedCodeSecurity]
 		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?getStaticPtr@@YAPEA_KPEBDH@Z")]
 		public static extern IntPtr GetStaticPtr([MarshalAs(UnmanagedType.LPStr)] string scriptName, int staticIndex);
+
+		/// <summary>
+		/// Returns a pointer to the command of the provided hash
+		/// </summary>
+		/// <param name="hash">The native hash</param>
+		/// <returns>Pointer to the command</returns>
+		[SuppressUnmanagedCodeSecurity]
+		[DllImport("ScriptHookRDR2.dll", ExactSpelling = true, EntryPoint = "?getCommandFromHash@@YAPEAX_K@Z")]
+		public static extern IntPtr GetCommandFromHash(ulong hash);
 
 #endif //CPP_SCRIPTHOOKRDR_V2
 
@@ -175,7 +180,7 @@ namespace RDR2DN
 		}
 
 		/// <summary>
-		/// Searches the address space of the current process for a memory pattern using the Boyer–Moore–Horspool algorithm.
+		/// Searches the address space of the current process for a memory pattern using the Boyerï¿½Mooreï¿½Horspool algorithm.
 		/// Will perform faster than the naive algorithm when the pattern is long enough to expect the bad character skip is consistently high.
 		/// </summary>
 		/// <param name="pattern">The pattern.</param>

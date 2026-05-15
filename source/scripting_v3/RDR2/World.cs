@@ -251,6 +251,7 @@ namespace RDR2
 			return blipsArr.ToArray();
 		}
 
+		/*
 		/// <summary>
 		/// Gets all <see cref="Camera"/>'s currently spawned/loaded in the game world
 		/// </summary>
@@ -282,6 +283,7 @@ namespace RDR2
 
 			return volumes.ToArray();
 		}
+		*/
 
 #endif //CPP_SCRIPTHOOKRDR_V2
 
